@@ -6,9 +6,11 @@ Confirmation of the audio (recorded content of your voice) converted into correc
 
 - HTTP method - Post
 - API Endpoint - https://api.groq.com/openai/v1/audio/translations
+
 - Request Body ( Raw Data )
     model - whisper-large-v3
     file -
+
 - Response - 
     {
     "text": " The goal is to prepare an enterprise-grade, production-ready playwright test automation framework. Please use the solid principles to build the framework with page object model and factory pattern. have the reusable modules for interaction with web elements and have the utilities for verification, validation, reporting and error handling. make sure auto auto healing feature is enabled and integrate it with git and then integrate with git labs sorry integrate it with github cacd pipeline",

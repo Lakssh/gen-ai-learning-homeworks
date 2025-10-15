@@ -1,0 +1,153 @@
+## Assignment
+
+Integrate the prompt to your API (using postman) and confirm the response (json)
+Objective: You can integrate prompt + LLM API
+
+## Solution
+
+- HTTPS Method -- Post
+
+- API Endpoint -- https://api.groq.com/openai/v1/chat/completions
+
+- Request -- json
+    {
+    "messages": [
+        {
+        "role": "user",
+        "content": "GENERATE SELENIUM CODE FOR AUTOMATING redbus.in\n\nInstruction\n\n- Generate automation test code for searching a bus\n- Generate only Selenium code\n- Use TestNG as runner\n- Include Java docs\n- Use Locator Strategies\n    - Use Id only wherever it is unique and do no have numbers on it\n    - Use\n- Please use the DOM provided below\n\n\nContext\n- You are an AI agent who generates automation test code\n- You are an expert in Testing, Selenium\n- Use Redbus.in as your application under test\n\nExample \npackage week2.day1;\n\n\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.chrome.ChromeDriver;\nimport org.openqa.selenium.support.ui.Select;\n\nimport io.github.bonigarcia.wdm.WebDriverManager;\n\npublic class CreateLead {\n    \n    public static void main(String[] args) {\n        \n        \n        // Step 0) Setup the chromedriver using webdrivermanager software\n        WebDriverManager.chromedriver().setup();\n        \n        // Step 1) Launch the chrome browser (Class Name -> ChromeDriver)\n        ChromeDriver driver = new ChromeDriver();\n        \n        // Step 2) Load the URL (http://leaftaps.com/opentaps/control/main) -> get\n        driver.get(\"http://leaftaps.com/opentaps\");\n        \n        // Step 3) Maximize the chrome browser\n        driver.manage().window().maximize();\n        \n        // Step 4) Find the username and type the value (DemoSalesManager)\n        driver.findElement(By.id(\"username\")).sendKeys(\"DemoSalesManager\");\n        \n        // Step 5) Find the password and type the value (crmsfa)\n        driver.findElement(By.id(\"password\")).sendKeys(\"crmsfa\");    \n        \n        // Step 6) Find the login button and click\n        driver.findElement(By.className(\"decorativeSubmit\")).click();\n        \n        // Step 7) Verify the title \n        String title = driver.getTitle();\n        System.out.println(title);\n        \n        // Step 8) Click CRM/SFA link\n        driver.findElement(By.linkText(\"CRM/SFA\")).click();\n        \n        // Step 9) Click Create Lead Link\n        driver.findElement(By.linkText(\"Create Lead\")).click();\n        \n        // Step 10) Find the company name and type the company name\n        driver.findElement(By.id(\"createLeadForm_companyName\")).sendKeys(\"TestLeaf\");\n        \n        // Step 11) Find the first name and type your name\n        driver.findElement(By.id(\"createLeadForm_firstName\")).sendKeys(\"Babu\");\n\n        // Step 12) Find the last name and type your name\n        driver.findElement(By.id(\"createLeadForm_lastName\")).sendKeys(\"Manickam\");\n        \n        // Step 12 b) Select the Source dropdown with one of the visible text\n        WebElement source = driver.findElement(By.id(\"createLeadForm_dataSourceId\"));\n        Select dd1 = new Select(source);\n        dd1.selectByVisibleText(\"Employee\");\n        \n        // Step 12 c) Select the marketing campaign with one of the value\n        WebElement marketing = driver.findElement(By.id(\"createLeadForm_marketingCampaignId\"));\n        Select dd2 = new Select(marketing);\n        dd2.selectByValue(\"9001\");\n\n        // Step 13) Click Create Lead Button\n        driver.findElement(By.name(\"submitButton\")).click();\n        \n        // Step 14) Print the new title\n        title = driver.getTitle();\n        System.out.println(title);\n    \n    }\n\n}\n\nhttps://github.com/TestLeafInc/TestLeafSeleniumTraining/tree/main/week2/day1\n\nDOM\n\n<div class=\"mainContent___b916e4\"><div class=\"inputsWrapper___4655bd\"><div class=\"inputAndSwapWrapper___e7dc96\"><div class=\"srcDestWrapper___e67e69\" tabindex=\"0\" role=\"button\"><div class=\"placeHolderContainer___17236c\"><i class=\"icon___be1a22 icon icon-boarding_point\"></i><div class=\"labelCityWrapper___fd5744\"><div class=\"label___57eda7 \">From</div><div class=\"srcDest___aa6db3\"></div></div></div></div></div><div class=\"srcDestWrapper___e67e69\" tabindex=\"0\" role=\"button\"><div class=\"placeHolderContainer___17236c\"><i class=\"icon___be1a22 icon icon-dropping_point\"></i><div class=\"labelCityWrapper___fd5744\"><div class=\"label___57eda7 \">To</div><div class=\"srcDest___aa6db3\"></div></div></div></div><div class=\"dateWrapper___fc9eaf\"><div class=\"dateInputWrapper___c8345a\" tabindex=\"0\" role=\"button\" aria-label=\"Select Date of Journey. Current date: 11 Oct, 2025\" aria-expanded=\"false\" aria-haspopup=\"dialog\"><i class=\"icon___0039d4 icon icon-date_range\"></i><div class=\"dojWrapper___1f3d15\"><span class=\"dateLabel___a92fe6 selected___4b9e19\">Date of Journey</span><span class=\"doj___e69938\">11 Oct, 2025</span></div></div><div class=\"buttonsWrapper___eba03a\"><div class=\"tonalWrap___357792 \" style=\"--button-width:auto\"><button class=\"tonalButton___ba650c \" role=\"button\" aria-label=\"Search for Today\">Today</button></div><div class=\"tonalWrap___357792 \" style=\"--button-width:auto\"><button class=\"tonalButton___ba650c \" role=\"button\" aria-label=\"Search for Tomorrow\">Tomorrow</button></div></div></div></div><div class=\"womenFunnelWrapper___22e69d\"><div class=\"womenFunnelToggleContainer___910415\"><div class=\"imageTextWrapper___f518aa\" role=\"button\" tabindex=\"0\" aria-label=\"Booking for women, Know more\"><img src=\"/rpwassets/public/images/female.svg\" alt=\"\" class=\"imageWrapper___2ff583\" width=\"32\" height=\"32\"><div class=\"textWrapper___4c65e4\"><div class=\"text___65a40a\">Booking for women</div><div class=\"linkText___6aa381\">Know more</div></div></div><div role=\"switch\" aria-checked=\"false\" aria-label=\"Booking for Women\" tabindex=\"0\"><label for=\"switch\" class=\"switchLabel___a8ead2 unChecked___09ee04 enabled___ad293b \"><input id=\"switch\" type=\"checkbox\" class=\"switchInput___50b81b\" aria-label=\"\" tabindex=\"-1\"></label></div></div></div>\n\nPersonas\n- Senior Test Automation Engineer to write the code\n- As an automation architect review the code and make it has followed the coding best practices\n\nOutput\n- Java code with Selenium and TestNG\n- Include Java docs\n- Follow coding best practices\n\nTone\n- Enterprise grade automation scripting"
+        },
+        {
+        "role": "system",
+        "content": "You are an senior automation assistant expert in Selenium and Java automation"
+        },
+        {
+        "role": "assistant",
+        "content": "provide only the Selenium java code"
+        }
+    ],
+    "model": "llama-3.1-8b-instant"
+    }
+
+-  Response 
+
+    {
+        "id": "chatcmpl-07e0611f-5370-4fd0-9429-eee01f2e6b45",
+        "object": "chat.completion",
+        "created": 1760525095,
+        "model": "llama-3.1-8b-instant",
+        "choices": [
+            {
+                "index": 0,
+                "message": {
+                    "role": "assistant",
+                    "content": " for automating redbus.in bus search functionality\n\n```java\n/**\n * Redbus.in Bus Search Automation using Selenium.\n * \n * @author [Your Name]\n * @since 1.0.0\n * @version 1.0.0\n */\npackage [Your Package Name];\n\nimport org.openqa.selenium.By;\nimport org.openqa.selenium.WebDriver;\nimport org.openqa.selenium.WebElement;\nimport org.openqa.selenium.chrome.ChromeDriver;\nimport org.openqa.selenium.support.ui.Select;\nimport org.testng.annotations.Test;\n\nimport io.github.bonigarcia.wdm.WebDriverManager;\n\n/**\n * This class represents the Redbus.in bus search automation.\n */\npublic class RedbusINBusSearchTest {\n\n    /**\n     * Test for searching a bus on Redbus.in.\n     */\n    @Test\n    public void testBusSearch() {\n        try {\n            // Step 0) Setup the chromedriver using webdrivermanager software\n            WebDriverManager.chromedriver().setup();\n\n            // Step 1) Launch the chrome browser (Class Name -> ChromeDriver)\n            WebDriver driver = new ChromeDriver();\n\n            // Step 2) Load the URL (url -> https://www.redbus.in/) -> get\n            driver.get(\"https://www.redbus.in/\");\n\n            // Step 3) Maximize the chrome browser\n            driver.manage().window().maximize();\n\n            // Step 4) Find the from city and type the value (e.g., Bengaluru)\n            WebElement fromCity = driver.findElement(By.id(\"src\"));\n            fromCity.sendKeys(\"Bengaluru\");\n\n            // Step 5) Wait for the suggestions and select the from city\n            Thread.sleep(2000);\n            fromCity.click();\n\n            // Step 6) Find the to city and type the value (e.g., Mysore)\n            WebElement toCity = driver.findElement(By.id(\"dest\"));\n            toCity.sendKeys(\"Mysore\");\n\n            // Step 7) Wait for the suggestions and select the to city\n            Thread.sleep(2000);\n            toCity.click();\n\n            // Step 8) Find the date of journey and type the value (e.g., 2025-12-31)\n            WebElement dateOfJourney = driver.findElement(By.xpath(\"//input[@aria-label='Select Date of Journey. Current date: 11 Oct, 2025']\"));\n            dateOfJourney.sendKeys(\"2025-12-31\");\n\n            // Step 9) Find the search button and click\n            driver.findElement(By.xpath(\"(//button[@aria-label='Search for Today'])[2]\")).click();\n\n            // Step 10) Print the page title\n            String title = driver.getTitle();\n            System.out.println(title);\n        } catch (Exception ex) {\n            System.out.println(\"Exception caught: \" + ex.getMessage());\n        } finally {\n            driver.quit();\n        }\n    }\n}\n```\n\nThis script launches the Chrome browser, navigates to the Redbus.in website, enters the from city (Bengaluru) and to city (Mysore), selects a date of journey (2025-12-31), and searches for buses. It then prints the page title to the console.\n\nThe code uses TestNG as the testing framework, and the WebDriverManager library to manage the ChromeDriver instance. It also includes JavaDoc comments to provide documentation and follows conventional coding practices.\n\n**Locator Strategies Used:**\n\n*   `id`: Used to find the elements with unique IDs, such as the source, destination, and date of journey fields.\n*   `xpath`: Used to find the elements with specific XPath expressions, such as the search button.\n*   `class name`: Used to find the elements with specific class names, but not used in this script.\n\n**Note:** The code uses `Thread.sleep()` to wait for the suggestions to appear, which is not the most reliable approach. A better approach would be to use explicit waits, such as WebDriverWait, to wait for the elements to be present and visible. However, this is outside the scope of this example. Additionally, this script is meant to be a starting point and may require modifications to work correctly in your environment."
+                },
+                "logprobs": null,
+                "finish_reason": "stop"
+            }
+        ],
+        "usage": {
+            "queue_time": 0.088369082,
+            "prompt_tokens": 1526,
+            "prompt_time": 0.088141408,
+            "completion_tokens": 843,
+            "completion_time": 1.121884681,
+            "total_tokens": 2369,
+            "total_time": 1.210026089
+        },
+        "usage_breakdown": null,
+        "system_fingerprint": "fp_33e8adf159",
+        "x_groq": {
+            "id": "req_01k7kqj2zke7cb6wkv37n8xpbg"
+        },
+        "service_tier": "on_demand"
+        }
+
+- Response (beautified) --
+
+    /**
+    * Redbus.in Bus Search Automation using Selenium.
+    *
+    * This script automates the process of searching for buses on Redbus.in.
+    * It launches the browser, enters source and destination cities,
+    * selects a date of journey, performs a search, and prints the page title.
+    *
+    * Locator Strategies:
+    *  - id: Used for unique elements like source, destination, and date fields.
+    *  - xpath: Used for complex or non-unique elements like the search button.
+    *
+    * Note: Thread.sleep() is used for demo purposes. In production, prefer
+    * explicit waits such as WebDriverWait for better reliability.
+    *
+    * @author [Your Name]
+    * @since 1.0.0
+    * @version 1.0.0
+    */
+
+    package [your.package.name];
+
+    import org.openqa.selenium.By;
+    import org.openqa.selenium.WebDriver;
+    import org.openqa.selenium.WebElement;
+    import org.openqa.selenium.chrome.ChromeDriver;
+    import org.testng.annotations.Test;
+    import io.github.bonigarcia.wdm.WebDriverManager;
+
+    /**
+    * This class represents the Redbus.in bus search automation test.
+    */
+    public class RedbusINBusSearchTest {
+
+        /**
+        * Test for searching a bus on Redbus.in.
+        */
+        @Test
+        public void testBusSearch() {
+            WebDriver driver = null;
+
+            try {
+                // Step 0: Setup ChromeDriver using WebDriverManager
+                WebDriverManager.chromedriver().setup();
+
+                // Step 1: Launch Chrome browser
+                driver = new ChromeDriver();
+
+                // Step 2: Load the Redbus website
+                driver.get("https://www.redbus.in/");
+                driver.manage().window().maximize();
+
+                // Step 3: Enter 'From' city (e.g., Bengaluru)
+                WebElement fromCity = driver.findElement(By.id("src"));
+                fromCity.sendKeys("Bengaluru");
+                Thread.sleep(2000); // Wait for suggestions
+                fromCity.click();
+
+                // Step 4: Enter 'To' city (e.g., Mysore)
+                WebElement toCity = driver.findElement(By.id("dest"));
+                toCity.sendKeys("Mysore");
+                Thread.sleep(2000); // Wait for suggestions
+                toCity.click();
+
+                // Step 5: Select Date of Journey (e.g., 2025-12-31)
+                WebElement dateOfJourney = driver.findElement(
+                    By.xpath("//input[@aria-label='Select Date of Journey. Current date: 11 Oct, 2025']")
+                );
+                dateOfJourney.sendKeys("2025-12-31");
+
+                // Step 6: Click on 'Search Buses' button
+                driver.findElement(By.xpath("(//button[@aria-label='Search for Today'])[2]")).click();
+
+                // Step 7: Print page title to console
+                String title = driver.getTitle();
+                System.out.println("Page Title after search: " + title);
+
+            } catch (Exception ex) {
+                System.err.println("Exception caught during test execution: " + ex.getMessage());
+            } finally {
+                // Step 8: Close the browser
+                if (driver != null) {
+                    driver.quit();
+                }
+            }
+        }
+    }

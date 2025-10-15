@@ -8,6 +8,7 @@ Provide a user story from your project or sample userstory--> ask to convert int
 - API Endpoint -- https://api.groq.com/openai/v1/chat/completions
 - Header (Auth)
 - Query Parameters
+
 - Request Body / Payload -- 
     {
     "messages": [
@@ -22,6 +23,7 @@ Provide a user story from your project or sample userstory--> ask to convert int
     ],
     "model": "openai/gpt-oss-20b"
     }
+
 
 - Response(beautified) --
 

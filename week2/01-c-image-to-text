@@ -5,7 +5,9 @@ Provide captcha (OCR images) as base64 string from different site --> confirm th
 ## Solution
 
 - HTTPS Method -- Post
+
 - API End point -- https://api.groq.com/openai/v1/chat/completions
+
 - Request body --
     {
     "messages": [
