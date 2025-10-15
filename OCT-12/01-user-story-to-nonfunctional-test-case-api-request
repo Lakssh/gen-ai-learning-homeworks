@@ -1,0 +1,252 @@
+## Solution:
+
+- HTTPS methods --- Post
+- API Endpoint -- https://api.groq.com/openai/v1/chat/completions
+- Header (Auth)
+- Query Parameters
+- Request Body / Payload -- 
+    {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a senior Performance Test engineer having great expertise in creating performance test cases"
+      },
+      {
+        "role": "user",
+        "content": "Instructions - For a given user story, generate performance test cases\n- Consider all the non functional performance cases\n- Clearly indicate the metrics and SLAs to be validated as part of the testing\nPersona - Act as a performance engineer to write the test case and as a senior performance engineer review the test case\nTone - Make it professional for submission to the customer\n- User Story - \"Feature: Create a New Case\n\n  Scenario: Successful case creation\n    Given I am logged in as a Support Agent with Case Creator permission\n    And I am on the New Case page\n    When I fill in \\\"Subject\\\" with \\\"Login issue\\\"\n    And I select \\\"Email\\\" for \\\"Origin\\\"\n    And I select \\\"High\\\" for \\\"Priority\\\"\n    And I select \\\"Acme Corp\\\" for \\\"Account\\\"\n    And I click \\\"Save\\\"\n    Then I should see a confirmation message \\\"Case created successfully\\\"\n    And the new Case should appear in my My Cases list\n    And the Case should be assigned to the \\\"Support – Tier 1\\\" queue\n\n  Scenario: Attempt to create case without required field\n    Given I am on the New Case page\n    When I leave \\\"Subject\\\" blank\n    And I click \\\"Save\\\"\n    Then I should see an error message \\\"Subject is required\\\"\n    And no new Case should be created\n\n  Scenario: Duplicate case warning\n    Given I have an open Case for Contact \\\"John Doe\\\" with Subject \\\"Password reset\\\"\n    And I am on the New Case page\n    When I enter \\\"Password reset\\\" in \\\"Subject\\\"\n    And I select \\\"John Doe\\\" for \\\"Contact\\\"\n    And I click \\\"Save\\\"\n    Then I should see a warning \\\"A similar open case already exists for this contact\\\"\n    And I should have the option to proceed or cancel\n\n  Scenario: Auto-populate default values\n    Given I am on the New Case page\n    When I select \\\"Email\\\" for \\\"Origin\\\"\n    Then \\\"Status\\\" should default to \\\"New\\\"\n    And \\\"Priority\\\" should default to \\\"Medium\\\"\n\n  Scenario: Priority-based queue assignment\n    Given I am on the New Case page\n    When I select \\\"High\\\" for \\\"Priority\\\"\n    And I click \\\"Save\\\"\n    Then the Case should be assigned to the \\\"Support – Tier 2\\\" queue\n\n  Scenario: Create case via Lightning Flow\n    Given I am on the Cases tab\n    When I click \\\"Create Case Flow\\\"\n    And I enter \\\"Billing question\\\" for \\\"Subject\\\"\n    And I select \\\"Phone\\\" for \\\"Origin\\\"\n    And I select \\\"Jane Smith\\\" for \\\"Contact\\\"\n    And I click \\\"Finish\\\"\n    Then a new Case should be created with the entered details\n    And it should be assigned to the default queue\n\n  Scenario: Create case via API\n    Given I send a POST request to /services/data/vXX.0/sobjects/Case/\n    And the payload contains:\n      | Subject   | Email issue |\n      | Origin    | Email       |\n      | Status    | New         |\n      | Priority  | Medium      |\n      | ContactId | 003xxxxxxxxxxxx |\n    When the request is processed\n    Then the response status should be 201\n    And the response body should contain the new Case Id\n    And the Case should appear in Salesforce assigned to the default queue\""
+      }
+    ],
+    "model": "openai/gpt-oss-20b"
+    }
+
+- Response(beautified) --
+
+  ## Performance Test Plan – “Create a New Case” Feature  
+  *(Prepared for Customer X – Salesforce Support Module)*  
+
+  | **Document** | **Version** | **Date** | **Author** |
+  |--------------|-------------|----------|------------|
+  | Performance Test Plan – Create‑Case Feature | 1.0 | 14‑Oct‑2025 | Senior Performance Engineer – John Doe |
+
+  ---
+
+  ### 1. Purpose & Scope  
+  The objective of this plan is to validate that the “Create a New Case” feature satisfies all non‑functional requirements and Service Level Agreements (SLAs) under realistic, peak, and stress workloads.  
+
+  The scope covers **all UI‑based and API‑based case creation paths** (standard page, Lightning Flow, REST API) and their interactions with backend services (queue assignment, duplicate detection, default value population).
+
+  ---
+
+  ### 2. Performance Objectives & SLAs  
+
+  | **Metric** | **Definition** | **SLA** |
+  |------------|----------------|---------|
+  | **Response Time (RT)** | Time from request to completion (UI) or response receipt (API) | ≤ 2 s for 95 % of transactions (UI) <br> ≤ 500 ms for 95 % (API) |
+  | **Throughput (TPS)** | Transactions per second | 300 TPS (UI) <br> 800 TPS (API) |
+  | **Error Rate** | % of failed transactions | < 0.1 % |
+  | **CPU Utilization** | Avg. CPU usage on App/DB servers | < 70 % |
+  | **Memory Utilization** | Avg. memory usage per server | < 80 % |
+  | **Concurrent Users (CU)** | Number of simultaneous session users | 1,000 (UI) <br> 2,000 (API) |
+
+  *All measurements will be taken over a 5‑minute steady‑state period and averaged across three test runs.*
+
+  ---
+
+  ### 3. Test Environment  
+
+  | Component | Version | Notes |
+  |-----------|---------|-------|
+  | Salesforce Org | Production‑Ready | Sandbox with data seed of 50,000 Contacts, 5,000 Cases |
+  | App Server | 6.x | 4 vCPUs, 16 GB RAM |
+  | Database | Oracle 12c | 8 vCPUs, 32 GB RAM |
+  | Load Generator | JMeter v5.6 | 4 instances |
+  | Monitoring | New Relic (App & DB) | Real‑time dashboards |
+
+  All test traffic is routed through the same network path used by production to capture realistic latency.
+
+  ---
+
+  ### 4. Test Scenarios & Test Cases  
+
+  > **Notation:**  
+  > - **TC‑#** – Test Case ID  
+  > - **Pre‑Req** – Preconditions  
+  > - **Steps** – Sequential actions  
+  > - **Expected** – Functional expectation  
+  > - **Perf Metric** – What will be measured  
+  > - **SLA** – Acceptance threshold
+
+  ---
+
+  #### 4.1 Scenario A – Successful UI Case Creation (High Priority)
+
+  | **TC‑A‑01** | UI Create – High Priority Case |
+  |------------|--------------------------------|
+  | **Pre‑Req** | - User logged in with Case Creator permission.<br>- “Support – Tier 2” queue exists. |
+  | **Steps** | 1. Open “New Case” page.<br>2. Enter Subject = “Login issue”.<br>3. Origin = “Email”.<br>4. Priority = “High”.<br>5. Account = “Acme Corp”.<br>6. Click “Save”. |
+  | **Expected** | Confirmation “Case created successfully”.<br>Case appears in “My Cases” and queued to “Support – Tier 2”. |
+  | **Perf Metric** | RT, TPS, Error Rate, CPU/Memory. |
+  | **SLA** | RT ≤ 2 s (95 % of cases). TPS ≥ 300. Error ≤ 0.1 %. CPU < 70 %. Memory < 80 %. |
+  | **Load Pattern** | 300 concurrent users performing this workflow for 5 min (steady‑state). |
+
+  > **Notes:**  
+  > - Duplicate detection must be disabled for this scenario to isolate queue assignment logic.  
+  > - Use synthetic data for Accounts/Contacts.  
+
+  ---
+
+  #### 4.2 Scenario B – UI Validation (Missing Required Field)
+
+  | **TC‑B‑01** | UI Validation – Subject Blank |
+  |------------|-------------------------------|
+  | **Pre‑Req** | User logged in; “New Case” page displayed. |
+  | **Steps** | 1. Leave Subject empty.<br>2. Click “Save”. |
+  | **Expected** | Error “Subject is required”. No case created. |
+  | **Perf Metric** | RT (< 1 s), Error Rate. |
+  | **SLA** | RT ≤ 1 s (100 %); Error Rate = 100 % (expected). |
+  | **Load Pattern** | 50 concurrent users (5 min) – verify no unintended throughput spikes on validation errors. |
+
+  ---
+
+  #### 4.3 Scenario C – Duplicate Case Warning (UI)
+
+  | **TC‑C‑01** | UI Duplicate Warning |
+  |------------|----------------------|
+  | **Pre‑Req** | Existing open case for Contact “John Doe” with Subject “Password reset”. |
+  | **Steps** | 1. Open “New Case”.<br>2. Subject = “Password reset”.<br>3. Contact = “John Doe”.<br>4. Click “Save”. |
+  | **Expected** | Warning “A similar open case already exists for this contact”. Option to proceed or cancel. |
+  | **Perf Metric** | RT for warning display, Error Rate (should be 0). |
+  | **SLA** | RT ≤ 2 s; Error ≤ 0.1 %. |
+  | **Load Pattern** | 200 concurrent users attempting duplicate creation (steady‑state). |
+
+  ---
+
+  #### 4.4 Scenario D – Auto‑Populate Default Values (UI)
+
+  | **TC‑D‑01** | UI Default Field Population |
+  |------------|-----------------------------|
+  | **Pre‑Req** | User on “New Case” page. |
+  | **Steps** | 1. Select Origin = “Email”. |
+  | **Expected** | Status auto‑defaults to “New”; Priority defaults to “Medium”. |
+  | **Perf Metric** | RT (field rendering). |
+  | **SLA** | RT ≤ 1 s (100 %); Error ≤ 0.1 %. |
+  | **Load Pattern** | 100 concurrent users selecting Origin (steady‑state). |
+
+  ---
+
+  #### 4.5 Scenario E – Priority‑Based Queue Assignment (UI)
+
+  | **TC‑E‑01** | UI Priority → Queue Mapping |
+  |------------|----------------------------|
+  | **Pre‑Req** | “Support – Tier 2” queue present. |
+  | **Steps** | 1. Open “New Case”.<br>2. Priority = “High”.<br>3. Click “Save”. |
+  | **Expected** | Case assigned to “Support – Tier 2” queue. |
+  | **Perf Metric** | RT, TPS, Error Rate. |
+  | **SLA** | RT ≤ 2 s (95 %); TPS ≥ 300; Error ≤ 0.1 %. |
+  | **Load Pattern** | 300 concurrent users with High priority selection (steady‑state). |
+
+  ---
+
+  #### 4.6 Scenario F – Lightning Flow Case Creation
+
+  | **TC‑F‑01** | Lightning Flow – Create Case |
+  |------------|-----------------------------|
+  | **Pre‑Req** | Lightning Flow “Create Case Flow” configured. |
+  | **Steps** | 1. Click “Create Case Flow” on Cases tab.<br>2. Subject = “Billing question”.<br>3. Origin = “Phone”.<br>4. Contact = “Jane Smith”.<br>5. Click “Finish”. |
+  | **Expected** | New case created, assigned to default queue. |
+  | **Perf Metric** | RT, TPS, Error Rate. |
+  | **SLA** | RT ≤ 2 s (95 %); TPS ≥ 200; Error ≤ 0.1 %. |
+  | **Load Pattern** | 200 concurrent users using Flow (steady‑state). |
+
+  ---
+
+  #### 4.7 Scenario G – REST API Case Creation
+
+  | **TC‑G‑01** | API POST – Create Case |
+  |------------|-----------------------|
+  | **Pre‑Req** | Authenticated session with API token. |
+  | **Payload** | `{ "Subject": "Email issue", "Origin": "Email", "Status": "New", "Priority": "Medium", "ContactId": "003xxxxxxxxxxxx" }` |
+  | **Steps** | 1. Send POST to `/services/data/vXX.0/sobjects/Case/`. |
+  | **Expected** | HTTP 201, JSON body contains `Id`. Case appears in Salesforce, assigned to default queue. |
+  | **Perf Metric** | Response Time, Throughput, Error Rate, CPU/Memory. |
+  | **SLA** | RT ≤ 500 ms (95 %); TPS ≥ 800; Error ≤ 0.1 %. |
+  | **Load Pattern** | 1,000 concurrent API clients (burst) for 5 min, then ramp to 2,000 for 5 min. |
+
+  ---
+
+  ### 5. Performance Test Execution Flow  
+
+  1. **Baseline Capture** – Run each scenario with a single user to capture baseline metrics.  
+  2. **Ramp‑Up** – Increase concurrent users linearly to target CU over 2 min.  
+  3. **Steady‑State** – Maintain target CU for 5 min.  
+  4. **Ramp‑Down** – Decrease CU to zero over 2 min.  
+  5. **Post‑Test Analysis** – Aggregate results, calculate percentiles, verify SLA compliance.  
+
+  All tests will be scripted in **Apache JMeter** (UI scenarios via **JMeter HTTP Sampler + HTML‑Parser**; API via **REST Sampler**).  
+
+  ---
+
+  ### 6. Test Data Strategy  
+
+  - **Accounts / Contacts** – 10,000 randomly generated, indexed for fast lookup.  
+  - **Cases** – Pre‑populate 5,000 open cases for duplicate detection tests.  
+  - **Users** – 10,000 Support Agents with varying permission sets.  
+  - **Queues** – “Support – Tier 1”, “Support – Tier 2”, “Default”.  
+
+  Data will be refreshed nightly to avoid stale references.
+
+  ---
+
+  ### 7. Monitoring & Alerting  
+
+  | **Metric** | **Tool** | **Alert Condition** |
+  |------------|----------|---------------------|
+  | App Server CPU | New Relic | > 80 % for > 2 min |
+  | DB Server CPU | New Relic | > 85 % for > 2 min |
+  | App Server Memory | New Relic | > 90 % for > 2 min |
+  | API Error Rate | Custom Dashboard | > 0.5 % |
+  | UI Error Rate | JMeter Assertion | > 0.5 % |
+  | Throughput | JMeter Listener | < 80 % of target |
+
+  All alerts are routed to the performance operations Slack channel.
+
+  ---
+
+  ### 8. Test Deliverables  
+
+  1. **Test Script Package** – JMeter `.jmx` files, CSV data sets.  
+  2. **Test Report** – Graphs of RT, Throughput, Error Rate, resource utilization, SLA compliance.  
+  3. **Root‑Cause Analysis** – For any SLA violations.  
+  4. **Recommendations** – Capacity planning, potential code optimizations.
+
+  ---
+
+  ### 9. Review & Sign‑Off  
+
+  | **Reviewer** | **Role** | **Signature** | **Date** |
+  |--------------|----------|---------------|----------|
+  | John Doe | Senior Performance Engineer (Lead) |  | 14‑Oct‑2025 |
+  | Jane Smith | Release Manager |  |  |
+  | Bob Lee | QA Lead |  |  |
+
+  **Comments from Review:**  
+  - All SLAs align with production expectations.  
+  - Consider adding a “Peak Load” test where UI and API concurrently hit 2× the target CU to simulate sudden traffic spikes.  
+  - Ensure that the duplicate detection logic is included in the load pattern for Scenario C to evaluate DB contention.
+
+  ---
+
+  ### 10. Acceptance Criteria  
+
+  All performance test cases must satisfy their SLA thresholds. If any metric fails, a **defect must be logged**, and remedial actions (code optimization, scaling) must be executed before the next release cycle.
+
+  ---
+
+  **Prepared by:**  
+  Senior Performance Engineer – John Doe  
+  Email: john.doe@example.com  
+  Phone: +1‑555‑123‑4567
+
+  ---
+
+  *End of Document*
