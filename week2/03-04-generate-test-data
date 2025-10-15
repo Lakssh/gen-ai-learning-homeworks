@@ -1,0 +1,364 @@
+## Assignment
+
+Generate test data for credit card applications for different types of cards and conditions
+
+Notes:
+
+- Use ICE POT framework
+- Integrate with API to validate the response
+
+## Solution
+
+- Prompt
+
+    Goal - Generate test data for credit card applications for different types of cards and conditions
+
+    Instructions - 
+        - Generate different test data combinations for different types of cards and conditions
+        - Consider customers from different country zones
+        - [Mandatory] Generate only unique Test data
+        - Generate 5 sets of data only
+        - Generate data more closer to reality
+        - Synthetically generate the Sensitive and customer PII data
+    Context - 
+        - You are a senior test engineer expert in testing the applications in Banking domain
+    Example - 
+        First Name - Lakshmanan
+        Last Name - Chellappan
+        Card Type - Visa Rewards card
+        Credit Score - Good
+        These are few example of test data, [Donot]  restrict yourself to only these fields, consider only as an example and generate the test data as per different cards and conditions available in the banking industry
+    Persona - 
+        - Act as an Automation engineer to generate multiple sets of test data
+        - Act as a Business person and review & refine the Test data to make it more closer to reality
+    Output format - 
+        - Output only the Test data in a json format
+    Tone - 
+        - Enterprise grade professional test engineer
+
+- Response ( from Deep Seek)
+
+        {
+        "test_data_sets": [
+            {
+            "application_id": "APP-US-7B4291",
+            "customer_profile": {
+                "first_name": "Daniel",
+                "last_name": "Rodriguez",
+                "date_of_birth": "1988-04-12",
+                "email": "d.rodriguez.7b4291@testdomain.com",
+                "phone": "+1-305-555-0147",
+                "address": "3250 Mary Street, Suite 210, Miami, FL 33133",
+                "country": "United States",
+                "national_id": "SSN-728-41-3921",
+                "annual_income": 92000,
+                "employment_status": "Employed",
+                "employment_tenure_months": 28
+            },
+            "card_details": {
+                "card_type": "Visa Signature Travel",
+                "requested_credit_limit": 18000,
+                "card_network": "Visa",
+                "card_tier": "Signature",
+                "purpose": "International business travel",
+                "preferred_currency": "USD"
+            },
+            "credit_assessment": {
+                "credit_score": 789,
+                "credit_score_tier": "Excellent",
+                "existing_customer": true,
+                "current_relationship_months": 42,
+                "outstanding_loans": 0,
+                "credit_utilization_ratio": 0.15
+            }
+            },
+            {
+            "application_id": "APP-EU-9C5832",
+            "customer_profile": {
+                "first_name": "Anja",
+                "last_name": "Schmidt",
+                "date_of_birth": "1991-11-05",
+                "email": "a.schmidt.9c5832@testdomain.de",
+                "phone": "+49-89-555-87321",
+                "address": "Leopoldstraße 87, 80802 München, Germany",
+                "country": "Germany",
+                "national_id": "DE-TAX-45-782-39104",
+                "annual_income": 58000,
+                "employment_status": "Self-Employed",
+                "employment_tenure_months": 18
+            },
+            "card_details": {
+                "card_type": "Mastercard World Business",
+                "requested_credit_limit": 12000,
+                "card_network": "Mastercard",
+                "card_tier": "World",
+                "purpose": "Freelance business expenses",
+                "preferred_currency": "EUR"
+            },
+            "credit_assessment": {
+                "credit_score": 695,
+                "credit_score_tier": "Good",
+                "existing_customer": false,
+                "current_relationship_months": 0,
+                "outstanding_loans": 15000,
+                "credit_utilization_ratio": 0.35
+            }
+            },
+            {
+            "application_id": "APP-APAC-2D7463",
+            "customer_profile": {
+                "first_name": "Kenji",
+                "last_name": "Yamamoto",
+                "date_of_birth": "1983-07-22",
+                "email": "k.yamamoto.2d7463@testdomain.co.jp",
+                "phone": "+81-3-555-21987",
+                "address": "Roppongi Hills Mori Tower, 6-10-1 Roppongi, Minato-ku, Tokyo 106-6155",
+                "country": "Japan",
+                "national_id": "JP-MYN-83-072-4281",
+                "annual_income": 110000,
+                "employment_status": "Employed",
+                "employment_tenure_months": 84
+            },
+            "card_details": {
+                "card_type": "JCB Gold Premium",
+                "requested_credit_limit": 25000,
+                "card_network": "JCB",
+                "card_tier": "Gold",
+                "purpose": "Executive corporate spending",
+                "preferred_currency": "JPY"
+            },
+            "credit_assessment": {
+                "credit_score": 815,
+                "credit_score_tier": "Excellent",
+                "existing_customer": true,
+                "current_relationship_months": 96,
+                "outstanding_loans": 0,
+                "credit_utilization_ratio": 0.08
+            }
+            },
+            {
+            "application_id": "APP-UK-4E1987",
+            "customer_profile": {
+                "first_name": "Charlotte",
+                "last_name": "Williams",
+                "date_of_birth": "1994-02-18",
+                "email": "c.williams.4e1987@testdomain.co.uk",
+                "phone": "+44-20-555-46782",
+                "address": "25 London Wall, Barbican, London EC2Y 5AE",
+                "country": "United Kingdom",
+                "national_id": "UK-NI-AB-12-34-56-C",
+                "annual_income": 42000,
+                "employment_status": "Contractor",
+                "employment_tenure_months": 6
+            },
+            "card_details": {
+                "card_type": "American Express Essential",
+                "requested_credit_limit": 3000,
+                "card_network": "American Express",
+                "card_tier": "Standard",
+                "purpose": "Building credit history",
+                "preferred_currency": "GBP"
+            },
+            "credit_assessment": {
+                "credit_score": 625,
+                "credit_score_tier": "Fair",
+                "existing_customer": false,
+                "current_relationship_months": 0,
+                "outstanding_loans": 8000,
+                "credit_utilization_ratio": 0.45
+            }
+            },
+            {
+            "application_id": "APP-MEA-8F3256",
+            "customer_profile": {
+                "first_name": "Fatima",
+                "last_name": "Al-Hassan",
+                "date_of_birth": "1986-09-30",
+                "email": "f.alhassan.8f3256@testdomain.ae",
+                "phone": "+971-4-555-71234",
+                "address": "Emirates Towers, Sheikh Zayed Road, Dubai, UAE",
+                "country": "United Arab Emirates",
+                "national_id": "AE-EMI-86-093-5721",
+                "annual_income": 155000,
+                "employment_status": "Business Owner",
+                "employment_tenure_months": 60
+            },
+            "card_details": {
+                "card_type": "Visa Infinite Privilege",
+                "requested_credit_limit": 35000,
+                "card_network": "Visa",
+                "card_tier": "Infinite",
+                "purpose": "High-net-worth lifestyle spending",
+                "preferred_currency": "AED"
+            },
+            "credit_assessment": {
+                "credit_score": 802,
+                "credit_score_tier": "Excellent",
+                "existing_customer": true,
+                "current_relationship_months": 36,
+                "outstanding_loans": 0,
+                "credit_utilization_ratio": 0.12
+            }
+            }
+        ]
+        }
+
+- Response from Llama API -
+        
+        {
+    "Test_Data": [
+        {
+        "Customer_ID": 1001,
+        "Full_Name": "Alexandr Ivanov",
+        "Date_of_Birth": 19921218,
+        "City": "Singapore",
+        "State": "Singapore",
+        "Zip": 300301,
+        "Country": "Singapore",
+        "Card_Type": "Gold American Express",
+        "Credit_Score": "Excellent",
+        "Account_Status": "Approved",
+        "Card_Issuer": "Bank of America",
+        "Card_Sub_Type": "Credit",
+        "Annual_Income": 150000,
+        "Employment_Status": "Employed",
+        "Email_ID": "alexandr.ivanov@bank.com",
+        "Mobile_No": 6732345678,
+        "Address": "123, Jurong East St 13, #10-03, Singapore 600123",
+        "Pincode": 610123,
+        "Card_Expiration_Month": 3,
+        "Card_Expiration_Year": 2027,
+        "Card_CVS_No": 123,
+        "Credit_Limit": 5000
+        },
+        {
+        "Customer_ID": 1002,
+        "Full_Name": "Daisuke Kimura",
+        "Date_of_Birth": 19891228,
+        "City": "Tokyo",
+        "State": "Tokyo",
+        "Zip": 1048576,
+        "Country": "Japan",
+        "Card_Type": "World Mastercard",
+        "Credit_Score": "Good",
+        "Account_Status": "Rejected",
+        "Card_Issuer": "Mitsui Bank",
+        "Card_Sub_Type": "Credit Debit",
+        "Annual_Income": 80000,
+        "Employment_Status": "Unemployed",
+        "Email_ID": "daisuke.kimura@bankmail.com",
+        "Mobile_No": 8134567890,
+        "Address": "456, Akihabara 1-Chome, Chiyoda-Ku, Tokyo",
+        "Pincode": 101001,
+        "Card_Expiration_Month": 12,
+        "Card_Expiration_Year": 2032,
+        "Card_CVS_No": 456,
+        "Credit_Limit": 3000
+        },
+        {
+        "Customer_ID": 1003,
+        "Full_Name": "Ming Xiao",
+        "Date_of_Birth": 19951110,
+        "City": "Shanghai",
+        "State": "Jingan",
+        "Zip": 200000,
+        "Country": "China",
+        "Card_Type": "Silver Visa",
+        "Credit_Score": "Poor",
+        "Account_Status": "Approved",
+        "Card_Issuer": "China United Bank",
+        "Card_Sub_Type": "Credit",
+        "Annual_Income": 30000,
+        "Employment_Status": "Employed",
+        "Email_ID": "ming.xiao@chinaemail.com",
+        "Mobile_No": 1345687890,
+        "Address": "123, Fuzhou Lu, Huangpu, Shanghai",
+        "Pincode": 200000,
+        "Card_Expiration_Month": 6,
+        "Card_Expiration_Year": 2031,
+        "Card_CVS_No": 789,
+        "Credit_Limit": 2500
+        },
+        {
+        "Customer_ID": 1004,
+        "Full_Name": "Ahmed Ali",
+        "Date_of_Birth": 19881220,
+        "City": "Kuwait",
+        "State": "Kuwait",
+        "Zip": 13001,
+        "Country": "Kuwait",
+        "Card_Type": "Cashback Mastercard",
+        "Credit_Score": "Excellent",
+        "Account_Status": "Rejected",
+        "Card_Issuer": "National Bank of Kuwait",
+        "Card_Sub_Type": "Cashback",
+        "Annual_Income": 100000,
+        "Employment_Status": "Self-Employed",
+        "Email_ID": "ahmed.ali@kuwaitemail.com",
+        "Mobile_No": 9661234567,
+        "Address": "123, Kuwait St, Safat, Kuwait",
+        "Pincode": 13001,
+        "Card_Expiration_Month": 9,
+        "Card_Expiration_Year": 2030,
+        "Card_CVS_No": 902,
+        "Credit_Limit": 6000
+        },
+        {
+        "Customer_ID": 1005,
+        "Full_Name": "Nadia Fattah",
+        "Date_of_Birth": 20011222,
+        "City": "Riyadh",
+        "State": "Riyadh",
+        "Zip": 11001,
+        "Country": "Saudi Arabia",
+        "Card_Type": "Student Visa",
+        "Credit_Score": "Good",
+        "Account_Status": "Approved",
+        "Card_Issuer": "Saudi American Bank",
+        "Card_Sub_Type": "Student",
+        "Annual_Income": 50000,
+        "Employment_Status": "Employed",
+        "Email_ID": "nadia.fattah@saudiemail.com",
+        "Mobile_No": 9668901234,
+        "Address": "123, King Fahad Road, Riyadh",
+        "Pincode": 11001,
+        "Card_Expiration_Month": 4,
+        "Card_Expiration_Year": 2032,
+        "Card_CVS_No": 111,
+        "Credit_Limit": 4000
+        }
+    ],
+    "Notes": {
+        "Description": "This output represents synthetically generated credit card test data following enterprise-grade QA standards.",
+        "Data_Characteristics": [
+        "Each test data record is unique and realistic.",
+        "All customer PII is synthetic and should not be used in production.",
+        "Includes various card types, income ranges, and credit scores.",
+        "Covers multiple countries and employment statuses."
+        ],
+        "Field_Definitions": {
+        "Customer_ID": "Integer",
+        "Full_Name": "String",
+        "Date_of_Birth": "Integer (YYYYMMDD format)",
+        "City": "String",
+        "State": "String",
+        "Zip": "Integer",
+        "Country": "String",
+        "Card_Type": "String",
+        "Credit_Score": "String (Excellent / Good / Poor)",
+        "Account_Status": "String (Approved / Rejected)",
+        "Card_Issuer": "String",
+        "Card_Sub_Type": "String",
+        "Annual_Income": "Integer (USD)",
+        "Employment_Status": "String",
+        "Email_ID": "String",
+        "Mobile_No": "Integer",
+        "Address": "String",
+        "Pincode": "Integer",
+        "Card_Expiration_Month": "Integer (MM)",
+        "Card_Expiration_Year": "Integer (YYYY)",
+        "Card_CVS_No": "Integer",
+        "Credit_Limit": "Integer (USD)"
+        }
+    }
+    }
