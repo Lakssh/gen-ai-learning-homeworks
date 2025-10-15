@@ -1,0 +1,64 @@
+## Assignment
+
+Provide captcha (OCR images) as base64 string from different site --> confirm their text
+
+## Solution
+
+- HTTPS Method -- Post
+- API End point -- https://api.groq.com/openai/v1/chat/completions
+- Request body --
+    {
+    "messages": [
+        {
+        "role": "user",
+        "content": [
+            {
+            "type": "text",
+            "text": "What's in this image? Output : Give only the text in the image"
+            },
+            {
+            "type": "image_url",
+            "image_url": {
+                "url": "https://jeroen.github.io/images/testocr.png"
+            }
+            }
+        ]
+        }
+    ],
+    "model": "meta-llama/llama-4-scout-17b-16e-instruct"
+    }
+
+- Response --
+
+    {
+        "id": "chatcmpl-55563762-3e7f-4538-9fd4-c35f152b7f9c",
+        "object": "chat.completion",
+        "created": 1760522666,
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+        "choices": [
+            {
+                "index": 0,
+                "message": {
+                    "role": "assistant",
+                    "content": "This is a lot of 12 point text to test the ocr code and see if it works on  all types of file format.\nThe quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox."
+                },
+                "logprobs": null,
+                "finish_reason": "stop"
+            }
+        ],
+        "usage": {
+            "queue_time": 0.232051831,
+            "prompt_tokens": 753,
+            "prompt_time": 0.024005142,
+            "completion_tokens": 68,
+            "completion_time": 0.154401927,
+            "total_tokens": 821,
+            "total_time": 0.178407069
+        },
+        "usage_breakdown": null,
+        "system_fingerprint": "fp_79da0e0073",
+        "x_groq": {
+            "id": "req_01k7kn803pfeqakm881qme53bd"
+        },
+        "service_tier": "on_demand"
+    }
