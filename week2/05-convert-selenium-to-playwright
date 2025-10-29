@@ -1,0 +1,25 @@
+## Assignment
+
+You are going to write prompt to convert selenium to playwright typescript
+- Once you convert, you need to copy to this URL and run !
+https://try.playwright.tech/?l=playwright-test
+Note: 
+- The selenium code should be working code 
+sample code available in below repository
+https://github.com/TestLeafInc/TestLeafSeleniumTraining
+
+## Solution
+
+- Goal -- Conver Selenium to playwright typescript
+- Instruction --
+    - Convert the given Selenium with Java code to playwright code with typescript in latest version
+    - Use coding best practices 
+    - Maintain all the logical steps exactly same as in the source and do not modify the processes
+    - Use the same locator strategy as in the source
+    - Donot use hard waits. Use explicit waits
+    - Follow clear comments f
+- Context --
+- Example --
+- Persona
+- Output format
+- Tone --

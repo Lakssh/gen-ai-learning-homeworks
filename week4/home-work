@@ -1,0 +1,100 @@
+## Homework 1
+
+- Convert the prompt.ts file to ICE POT formatted prompt using co-pilot agent/edit mode
+
+## Homework 2 / Weekdays
+- Implement Jira Integration with your user story 
+
+## Supervised Finetuning
+
+    Step by Step (Supervised Fine tuning)
+
+    Pre-steps
+
+    #1) Extract the training.zip (that has 7 existing leaftaps example)
+    #2) Extract leaftaps.zip (Selenium Java framework with TrainingDataConverter)
+    #3) Import project as maven project in eclipse / vscode 
+
+    Steps
+
+    1.⁠ ⁠Data Collection
+
+    •⁠  ⁠As a team, go to leaftaps application ( Credentials for leaftaps: demosalesmanager ./ crmsfa)
+    •⁠  ⁠Collect DOM (app) and equivalent page (leaftaps POM Project)
+    •⁠  ⁠Store in the existing format ===HTML=== ... ===JAVA===
+    •⁠  ⁠Save it as <page_name.txt>
+    •⁠  ⁠Once you complete other 3-4 missing txt 
+
+    2) Generate jsonl
+
+    •⁠  ⁠Go to the Maven Java project (leaftaps)
+    •⁠  ⁠Go to the TrainingDataConverter class
+    •⁠  ⁠Change the file path (line 58,59)
+    •⁠  ⁠Save and Run as Java applicaton
+    •⁠  ⁠The jsonl should get generated and verify
+    •⁠  ⁠Confirm it has 10 or more !!
+
+    3) Upload training data
+
+    •⁠  ⁠Go to api.testleaf.com, login
+    •⁠  ⁠Model --> Storage
+    •⁠  ⁠Click Upload, drag-drop the file, choose fine-tune
+    •⁠  ⁠Click Upload button and you will see file id (note id for reference file-FEbcWaTdHos1JmkRJcHb9y )
+
+
+    4) Create Fine tuning model
+
+    •⁠  ⁠Fine tuning --> Create
+    •⁠  ⁠Select Supervised Fine tuning, Base Model (4o-mini)
+    •⁠  ⁠Select the existing training data (that you upoaded in step 3)
+    •⁠  ⁠Select Batch size (1)
+    •⁠  ⁠Select LR Multiplier (0.05 to 0.1)
+    •⁠  ⁠Select Epochs (4-5)
+    •⁠  ⁠Click Create Model
+
+    5) Monitor the fine tuning model
+
+    •⁠  ⁠Watch the Messages for errors
+    •⁠  ⁠If there are errors, debug
+    •⁠  ⁠Watch 'Fine-tuning job started' message
+    •⁠  ⁠Note the training loss and other fields
+    •⁠  ⁠It may take 10 minutes for the job to complete
+    •⁠  ⁠Once successful, copy the output model
+    (Example: ft:gpt-4o-mini-2024-07-18:internals::CHhwqIBG)
+
+    6.⁠ ⁠Create API Key
+
+    •⁠  ⁠Create new API key for api.testleaf.com 
+    •⁠  ⁠Note it down
+
+    7.⁠ ⁠Change the model and prompt (ai-extension)
+
+    •⁠  ⁠popup.js (add the following details in 118 or so)
+
+        ,
+        testleaf: [
+            { value: 'ft:gpt-4o-mini-2024-07-18:internals::CHhwqIBG', label: 'Leaftaps SFT' }
+        ]
+    •⁠  ⁠replace the ft model with yours and make label meaningful
+
+    •⁠  ⁠Open the prompts.js and go to SELENIUM_JAVA_PAGE_ONLY
+    •⁠  ⁠Update the instructions (use fine tuned model)
+    •⁠  ⁠Update the example (with LoginPage.java that uses your framework)
+    •⁠  ⁠Save the file
+
+    8.⁠ ⁠Validate the extension
+
+    •⁠  ⁠Close the existing extension (Do not have remove)
+    •⁠  ⁠Open it again
+    •⁠  ⁠Go to settings, choose testleaf, model
+    •⁠  ⁠Update the testleaf api key
+    •⁠  ⁠close the extension and reopen
+    •⁠  ⁠choose page class and inspect few elements of leaftaps app
+    •⁠  ⁠Validate the output of the generated code
+    •⁠  ⁠It should be in the framework format
+
+    Notes:
+
+    •⁠  ⁠Sometimes, the cached tokens - you will see the code generating in old format
+    •⁠  ⁠After few generations, you will notice is all fine 
+    •⁠  ⁠Take away: Try to generate few page classes, before you come to conclusion

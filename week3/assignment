@@ -1,0 +1,24 @@
+Assignment 1:
+
+Add Playwright /typescript combination for generating scripts
+
+[Optional] Add cypress for generating text
+
+Assignemnt 2:
+
+Add a check box for test data generation
+For every input field, generate random test data based on number of records
+Generate --> multiple random test data !!
+
+Assignment 3:
+
+Add a new groq model and confirm it is working
+
+Hint: add model id and label in popup.js  + close / reopen
+
+
+Hint for playwright/typescript:
+
+1.Go to chat.js
+2.Add additional conditional logic for the specific browser engine (playwright) and language (typescript)
+3.Add prompt specific for playwright page and add it to the code generator types.
