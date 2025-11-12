@@ -1,0 +1,23 @@
+-- Langflow pipeline for code review
+   - API Request to Github raw link ( To read the code) (https://raw.githubusercontent.com/Lakssh/user-story-to-test-app/main/frontend/src/App.tsx)
+        -> Parser ( Stringify the code ) 
+            ->  LLM ( Groq, Llama model to fetch the java code) 
+                -> Prompt Template ( To generate code review comments)
+                    -> LLM ( Groq, Llama model to generate code review comments)
+                        -> Output
+
+-- Langlow pipeline for vector embedding of user stories and test cases
+   - API Request to Jira ( Fetch user stories and test cases)
+        -> Parser ( Stringify the data)
+            ->  LLM ( Groq, Llama model to fetch the required fields) 
+                -> Save as a text file
+    -> Mongo DB Vector DB Node 
+        -> Ingest the text file to vector DB with metadata - ID, Type (user story/test case), Priority, Module)
+        -> Provide Mistral embedding model (1024 dimension)
+            -> Output
+
+-- Mongo DB
+    -> Get Connection String
+    -> Create DB
+        -> Create Collection
+            -> Create Index (with Metadata)

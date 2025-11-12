@@ -1,0 +1,16 @@
+## Chrome Extension
+
+## QA Agent
+
+1. Deploy current version
+    a. Deploy frontend on Netlify
+    b. Deploy backend on rendor
+Pre-req
+- Jira 
+- Playwright framework
+
+- User Story to Test Case Generation
+- Test Case to Playwright Automation Script
+- Defect Prediction bot
+- RAG model 
+
